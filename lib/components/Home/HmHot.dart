@@ -1,4 +1,6 @@
 // 热门组件
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class HmHot extends StatelessWidget {
@@ -21,7 +23,8 @@ class HmHot extends StatelessWidget {
                 _buildHotPromotion(),
                 const SizedBox(width: 8),
                 _buildHotProduct(
-                  imageUrl: 'https://picsum.photos/id/1060/400/600',
+                  imageUrl:
+                      'https://picsum.photos/id/${Random().nextInt(1000)}/400/600', //改成随机的图片
                   price: '¥142.00',
                 ),
               ],
@@ -37,12 +40,14 @@ class HmHot extends StatelessWidget {
               titleColor: const Color.fromARGB(255, 255, 183, 77),
               items: [
                 _buildHotProduct(
-                  imageUrl: 'https://picsum.photos/id/21/400/400',
+                  imageUrl:
+                      'https://picsum.photos/id/${Random().nextInt(1000)}/400/400', //改成随机的图片
                   price: '¥142.00',
                 ),
                 const SizedBox(width: 8),
                 _buildHotProduct(
-                  imageUrl: 'https://picsum.photos/id/175/400/400',
+                  imageUrl:
+                      'https://picsum.photos/id/${Random().nextInt(1000)}/400/400', //改成随机的图片
                   price: '¥132.00',
                 ),
               ],
@@ -104,8 +109,10 @@ class HmHot extends StatelessWidget {
             height: 100,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              image: const DecorationImage(
-                image: NetworkImage('https://picsum.photos/id/21/400/400'),
+              image: DecorationImage(
+                image: NetworkImage(
+                  'https://picsum.photos/id/${Random().nextInt(1000)}/400/400', //改成随机的图片
+                ),
                 fit: BoxFit.cover,
               ),
             ),
