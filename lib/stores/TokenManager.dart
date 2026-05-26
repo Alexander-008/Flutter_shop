@@ -13,19 +13,19 @@ class TokenManager {
     token = prefs.getString(GlobalConstants.TOKEN_KEY) ?? '';
   } //初始化token
 
-  setToken(String token) async {
+  Future<void> setToken(String token) async {
     // this.token = token;
     final prefs = await _getInstance();
     prefs.setString(GlobalConstants.TOKEN_KEY, token);
   }
 
   //获取token
-  getToken() {
+  String getToken() {
     return token;
   }
 
   //移除token
-  removeToken() async {
+  Future<void> removeToken() async {
     final prefs = await _getInstance();
     prefs.remove(GlobalConstants.TOKEN_KEY);
     token = ''; //清空token变量

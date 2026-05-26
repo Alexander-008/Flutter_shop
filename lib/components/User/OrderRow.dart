@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class OrderRow extends StatelessWidget {
-  const OrderRow({Key? key}) : super(key: key);
+  const OrderRow({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -89,8 +89,7 @@ class OrderItem extends StatelessWidget {
   final IconData icon;
   final String label;
 
-  const OrderItem({Key? key, required this.icon, required this.label})
-    : super(key: key);
+  const OrderItem({super.key, required this.icon, required this.label});
 
   @override
   Widget build(BuildContext context) {

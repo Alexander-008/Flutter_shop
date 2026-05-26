@@ -4,7 +4,7 @@ import 'package:hm_shop/components/Category/CategoryRight.dart';
 import 'package:hm_shop/models/home.dart';
 
 class CategoryPage extends StatefulWidget {
-  CategoryPage({Key? key}) : super(key: key);
+  const CategoryPage({super.key});
 
   @override
   _CategoryPageState createState() => _CategoryPageState();

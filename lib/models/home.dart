@@ -145,7 +145,7 @@ class GoodsItems {
     };
   }
 
-  take(int i) {}
+  void take(int i) {}
 }
 
 // 单个商品模型

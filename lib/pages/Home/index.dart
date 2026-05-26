@@ -9,7 +9,7 @@ import 'package:hm_shop/models/home.dart';
 import 'package:hm_shop/utils/ToastUtil.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -17,7 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   // 滚动控制器
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
   // 轮播图数据
   List<HomeModelBanner> _bannerList = [];
   // 分类数据

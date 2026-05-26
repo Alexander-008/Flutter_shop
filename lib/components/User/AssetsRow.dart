@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AssetsRow extends StatelessWidget {
-  const AssetsRow({Key? key}) : super(key: key);
+  const AssetsRow({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +28,11 @@ class AssetItem extends StatelessWidget {
   final String value;
 
   const AssetItem({
-    Key? key,
+    super.key,
     required this.icon,
     required this.label,
     required this.value,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

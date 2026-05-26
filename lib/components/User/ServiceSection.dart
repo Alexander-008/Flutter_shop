@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ServiceSection extends StatelessWidget {
-  const ServiceSection({Key? key}) : super(key: key);
+  const ServiceSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +54,7 @@ class ServiceItem extends StatelessWidget {
   final IconData icon;
   final String label;
 
-  const ServiceItem({Key? key, required this.icon, required this.label})
-    : super(key: key);
+  const ServiceItem({super.key, required this.icon, required this.label});
 
   @override
   Widget build(BuildContext context) {

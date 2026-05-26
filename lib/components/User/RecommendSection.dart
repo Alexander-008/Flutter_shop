@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class RecommendSection extends StatelessWidget {
-  const RecommendSection({Key? key}) : super(key: key);
+  const RecommendSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -92,14 +92,14 @@ class RecommendProduct extends StatelessWidget {
   final String sales;
 
   const RecommendProduct({
-    Key? key,
+    super.key,
     required this.imageUrl,
     required this.title,
     required this.price,
     required this.originalPrice,
     required this.tag,
     required this.sales,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

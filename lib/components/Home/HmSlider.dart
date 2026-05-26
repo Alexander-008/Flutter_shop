@@ -6,7 +6,7 @@ import 'package:hm_shop/models/home.dart';
 class HmSlider extends StatefulWidget {
   // 轮播图数据
   final List<HomeModelBanner> bannerList;
-  HmSlider({Key? key, required this.bannerList}) : super(key: key);
+  const HmSlider({super.key, required this.bannerList});
 
   @override
   _HmSliderState createState() => _HmSliderState();
@@ -14,21 +14,21 @@ class HmSlider extends StatefulWidget {
 
 class _HmSliderState extends State<HmSlider> {
   //控制器
-  CarouselSliderController _sliderController = CarouselSliderController();
+  final CarouselSliderController _sliderController = CarouselSliderController();
   // 轮播图当前索引
   int _currentIndex = 0;
   //轮播图组件
   Widget _buildSlider() {
     //动态获取轮播图宽度
-    double _width = MediaQuery.of(context).size.width; //获取当前屏幕宽度
+    double width = MediaQuery.of(context).size.width; //获取当前屏幕宽度
     //插件：carousel_slider
     return CarouselSlider(
       carouselController: _sliderController, //控制器
       items: widget.bannerList
           .map(
-            (item) => Container(
+            (item) => SizedBox(
               height: 200,
-              width: _width, //动态获取宽度
+              width: width, //动态获取宽度
               child: Image(image: NetworkImage(item.imgUrl), fit: BoxFit.cover),
             ),
           )

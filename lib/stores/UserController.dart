@@ -8,7 +8,7 @@ class UserController extends GetxController {
   var redirectToShop = false.obs; //是否需要跳转到购物车
 
   // 更新用户信息
-  updateUserInfo(UserInfo newUserInfo) {
+  void updateUserInfo(UserInfo newUserInfo) {
     userInfo.value = newUserInfo;
   }
 

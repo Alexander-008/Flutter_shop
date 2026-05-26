@@ -69,7 +69,6 @@ class LocationService {
         List<Placemark> placemarks = await placemarkFromCoordinates(
           position.latitude,
           position.longitude,
-          localeIdentifier: 'zh_CN',
         );
 
         if (placemarks.isNotEmpty) {

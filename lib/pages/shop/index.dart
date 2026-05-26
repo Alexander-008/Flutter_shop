@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../utils/LocationService.dart';
 
 class ShopPage extends StatefulWidget {
-  const ShopPage({Key? key}) : super(key: key);
+  const ShopPage({super.key});
 
   @override
   State<ShopPage> createState() => _ShopPageState();
@@ -64,7 +64,7 @@ class _ShopPageState extends State<ShopPage> {
 }
 
 class ProBanner extends StatelessWidget {
-  const ProBanner({Key? key}) : super(key: key);
+  const ProBanner({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +104,7 @@ class ProBanner extends StatelessWidget {
 }
 
 class LocationBar extends StatefulWidget {
-  const LocationBar({Key? key}) : super(key: key);
+  const LocationBar({super.key});
 
   @override
   State<LocationBar> createState() => _LocationBarState();
@@ -164,7 +164,7 @@ class _LocationBarState extends State<LocationBar> {
 }
 
 class ExchangeSection extends StatelessWidget {
-  const ExchangeSection({Key? key}) : super(key: key);
+  const ExchangeSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -305,10 +305,10 @@ class CartItem extends StatelessWidget {
   final ValueChanged<bool?> onSelectedChanged;
 
   const CartItem({
-    Key? key,
+    super.key,
     required this.isSelected,
     required this.onSelectedChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -461,7 +461,7 @@ class CartItem extends StatelessWidget {
 }
 
 class RecommendSection extends StatelessWidget {
-  const RecommendSection({Key? key}) : super(key: key);
+  const RecommendSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -569,10 +569,10 @@ class BottomBar extends StatelessWidget {
   final ValueChanged<bool?> onAllSelectedChanged;
 
   const BottomBar({
-    Key? key,
+    super.key,
     required this.isAllSelected,
     required this.onAllSelectedChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

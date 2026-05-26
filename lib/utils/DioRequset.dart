@@ -10,7 +10,7 @@ class DioRequest {
     _configDio();
   }
   //配置dio
-  _configDio() {
+  void _configDio() {
     _dio.options
       ..baseUrl = GlobalConstants.BASE_URL
       ..connectTimeout = Duration(seconds: GlobalConstants.TIME_OUT)
@@ -72,7 +72,7 @@ class DioRequest {
   //进一步处理返回结果的函数
   Future<T> _handleResponse<T>(Response<T> response) async {
     try {
-      Response<T> res = await response;
+      Response<T> res = response;
       final data = res.data as Map<String, dynamic>;
       if (data['code'] == GlobalConstants.SUCCESS_CODE) {
         //HTTP 状态和业务状态均正常，就可以正常的放行通过

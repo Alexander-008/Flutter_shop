@@ -62,7 +62,7 @@ class HmSuggestion extends StatelessWidget {
   List<GoodsItem> _getGoodsList() {
     if (productList.subTypes.isNotEmpty) {
       final goodsItems = productList.subTypes.first.goodsItems;
-      if (goodsItems != null && goodsItems.items.isNotEmpty) {
+      if (goodsItems.items.isNotEmpty) {
         return goodsItems.items.take(3).toList();
       }
     }

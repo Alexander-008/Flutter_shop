@@ -7,7 +7,7 @@ import 'package:hm_shop/components/User/FeatureSection.dart';
 import 'package:hm_shop/components/User/RecommendSection.dart';
 
 class UserPage extends StatelessWidget {
-  UserPage({Key? key}) : super(key: key);
+  const UserPage({super.key});
 
   @override
   Widget build(BuildContext context) {

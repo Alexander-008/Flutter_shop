@@ -9,7 +9,7 @@ import 'package:hm_shop/stores/UserController.dart';
 import 'package:hm_shop/stores/TokenManager.dart';
 
 class MainPage extends StatefulWidget {
-  MainPage({Key? key}) : super(key: key);
+  const MainPage({super.key});
 
   @override
   _MainPageState createState() => _MainPageState();

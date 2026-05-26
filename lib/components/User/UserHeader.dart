@@ -6,7 +6,7 @@ import 'package:hm_shop/stores/UserController.dart';
 class UserHeader extends StatelessWidget {
   final UserController _userController = Get.find<UserController>();
 
-  UserHeader({Key? key}) : super(key: key);
+  UserHeader({super.key});
 
   @override
   Widget build(BuildContext context) {

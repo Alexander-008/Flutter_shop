@@ -7,11 +7,11 @@ class CategoryLeft extends StatelessWidget {
   final Function(int) onTap;
 
   const CategoryLeft({
-    Key? key,
+    super.key,
     required this.categoryList,
     required this.selectedIndex,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

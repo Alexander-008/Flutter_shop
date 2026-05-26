@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class FeatureSection extends StatelessWidget {
-  const FeatureSection({Key? key}) : super(key: key);
+  const FeatureSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -65,13 +65,13 @@ class FeatureItem extends StatelessWidget {
   final Color? badgeColor;
 
   const FeatureItem({
-    Key? key,
+    super.key,
     required this.icon,
     required this.label,
     required this.badge,
     required this.iconBgColor,
     this.badgeColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
