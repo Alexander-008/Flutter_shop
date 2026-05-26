@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:hm_shop/api/user.dart';
 import 'package:hm_shop/pages/Category/index.dart';
 import 'package:hm_shop/pages/Home/index.dart';
 import 'package:hm_shop/pages/User/index.dart';
 import 'package:hm_shop/pages/shop/index.dart';
+import 'package:hm_shop/stores/UserController.dart';
+import 'package:hm_shop/stores/TokenManager.dart';
 
 class MainPage extends StatefulWidget {
   MainPage({Key? key}) : super(key: key);
@@ -12,6 +16,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  final UserController _userController = Get.put(UserController());
   //首页的tabBar
   final List<Map<String, String>> _tab = [
     {
@@ -49,6 +54,57 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
+  @override
+  void initState() {
+    super.initState();
+    // 初始化用户信息
+    _initUser();
+    // 监听是否需要跳转到购物车
+    ever(_userController.redirectToShop, (redirect) {
+      if (redirect) {
+        // 跳转到购物车页面
+        setState(() {
+          _currentIndex = 2;
+        });
+        // 重置标志位
+        _userController.setRedirectToShop(false);
+      }
+    });
+  }
+
+  /// 初始化用户信息（持久化登录）
+  Future<void> _initUser() async {
+    // 初始化 tokenManager
+    await tokenManager.init();
+    // 检查 token 是否有值
+    if (tokenManager.getToken().isNotEmpty) {
+      // 如果 token 有值，就获取用户信息
+      try {
+        var userInfo = await getUserInfoAPI();
+        _userController.updateUserInfo(userInfo);
+      } catch (e) {
+        // 获取用户信息失败，清除 token
+        await tokenManager.removeToken();
+      }
+    }
+  }
+
+  /// 处理购物车点击
+  Future<void> _handleShopTap() async {
+    // 检查 token 是否存在
+    String token = tokenManager.getToken();
+    if (token.isEmpty) {
+      // 未登录，标记需要跳转到购物车，然后跳转到登录页面
+      _userController.setRedirectToShop(true);
+      Navigator.pushNamed(context, '/login');
+    } else {
+      // 已登录，切换到购物车页面
+      setState(() {
+        _currentIndex = 2;
+      });
+    }
+  }
+
   //定义方法childrenPages使用
   List<Widget> _getChildrenPages() {
     return [HomePage(), CategoryPage(), ShopPage(), UserPage()];
@@ -72,9 +128,14 @@ class _MainPageState extends State<MainPage> {
         unselectedItemColor: Colors.grey,
         items: _getBottomNavigationBarItems(),
         onTap: (index) {
-          setState(() {
-            _currentIndex = index; //更新当前选中的索引
-          });
+          // 购物车索引为2（首页0, 分类1, 购物车2, 我的3）
+          if (index == 2) {
+            _handleShopTap();
+          } else {
+            setState(() {
+              _currentIndex = index;
+            });
+          }
         },
       ),
     );

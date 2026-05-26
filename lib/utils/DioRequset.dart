@@ -1,6 +1,7 @@
 //对dio进行二次封装
 import 'package:dio/dio.dart';
 import 'package:hm_shop/constant/index.dart';
+import 'package:hm_shop/stores/TokenManager.dart';
 
 class DioRequest {
   final _dio = Dio(); //实例化dio
@@ -24,6 +25,15 @@ class DioRequest {
       InterceptorsWrapper(
         //请求拦截器
         onRequest: (options, handler) {
+          //添加token到请求头
+          if (tokenManager.getToken().isNotEmpty) {
+            //如果token不为空
+            options.headers['Authorization'] =
+                'Bearer ${tokenManager.getToken()}';
+          }
+          //添加请求头
+          options.headers['Content-Type'] = 'application/json';
+          //放行通过
           return handler.next(options);
         },
         //响应拦截器
@@ -37,7 +47,13 @@ class DioRequest {
         },
         //错误拦截器
         onError: (error, handler) {
-          return handler.reject(error); //抛出异常
+          // return handler.reject(error); //抛出异常
+          handler.reject(
+            DioException(
+              requestOptions: error.requestOptions,
+              message: error.response?.data['msg'] ?? '请求失败',
+            ),
+          );
         },
       ),
     );
@@ -46,6 +62,11 @@ class DioRequest {
   //get请求
   Future<dynamic> get(String url, {Map<String, dynamic>? params}) async {
     return await _handleResponse(await _dio.get(url, queryParameters: params));
+  }
+
+  //post请求
+  Future<dynamic> post(String url, {Map<String, dynamic>? data}) async {
+    return await _handleResponse(await _dio.post(url, data: data));
   }
 
   //进一步处理返回结果的函数
@@ -57,28 +78,24 @@ class DioRequest {
         //HTTP 状态和业务状态均正常，就可以正常的放行通过
         return data['result'];
       } else {
-        // throw DioException(requestOptions: res.requestOptions);
-        throw Exception(data['msg'] ?? '请求失败');
+        throw DioException(
+          requestOptions: res.requestOptions,
+          message: data['msg'] ?? '请求失败',
+        ); //抛出异常，让调用者处理
       }
     } catch (e) {
-      rethrow;
+      rethrow; //抛出异常，让调用者处理
     }
   }
-
-  //post请求
-  post(String url, {Map<String, dynamic>? params}) async {
-    return await _dio.post(url, data: params);
-  }
-
   //更新请求
-  put(String url, {Map<String, dynamic>? params}) async {
-    return await _dio.put(url, data: params);
-  }
+  // Future<dynamic> put(String url, {Map<String, dynamic>? data}) async {
+  //   return await _handleResponse(await _dio.put(url, data: data));
+  // }
 
-  //删除请求
-  delete(String url, {Map<String, dynamic>? params}) async {
-    return await _dio.delete(url, data: params);
-  }
+  // //删除请求
+  // Future<dynamic> delete(String url, {Map<String, dynamic>? data}) async {
+  //   return await _handleResponse(await _dio.delete(url, data: data));
+  // }
 }
 
 final dioRequest = DioRequest(); //实例化dioRequest

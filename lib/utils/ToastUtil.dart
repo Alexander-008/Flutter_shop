@@ -2,8 +2,17 @@
 import 'package:flutter/material.dart';
 
 class ToastUtil {
+  static bool _isShow = false;
   // 成功提示
   static void showSuccess(BuildContext context, String message) {
+    if (ToastUtil._isShow) {
+      return;
+    }
+    ToastUtil._isShow = true;
+    // 2秒后关闭提示
+    Future.delayed(const Duration(seconds: 2), () {
+      ToastUtil._isShow = false;
+    });
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Row(
@@ -20,10 +29,10 @@ class ToastUtil {
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        duration: const Duration(seconds: 2),
-        elevation: 6,
+        duration: const Duration(seconds: 2), // 提示显示时间
+        elevation: 6, // 提示阴影高度
         action: SnackBarAction(
-          label: '关闭',
+          label: '关闭', // 关闭按钮文本
           textColor: Colors.white,
           onPressed: () => ScaffoldMessenger.of(context).hideCurrentSnackBar(),
         ),
@@ -33,6 +42,14 @@ class ToastUtil {
 
   // 错误提示
   static void showError(BuildContext context, String message) {
+    if (ToastUtil._isShow) {
+      return;
+    }
+    ToastUtil._isShow = true;
+    // 3秒后关闭提示
+    Future.delayed(const Duration(seconds: 3), () {
+      ToastUtil._isShow = false;
+    });
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Row(
